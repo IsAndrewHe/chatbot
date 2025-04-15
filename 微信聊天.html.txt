@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>聊天机器人助手</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .chat-container {
+            width: 350px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .chat-header {
+            background-color: #ff6b6b;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+        .chat-messages {
+            height: 300px;
+            padding: 10px;
+            overflow-y: auto;
+            background-color: white;
+        }
+        .message.user {
+            text-align: right;
+        }
+        .message.bot {
+            text-align: left;
+        }
+        .message-text {
+            display: inline-block;
+            padding: 8px 12px;
+            margin-bottom: 10px;
+            border-radius: 20px;
+            max-width: 70%;
+        }
+        .user .message-text {
+            background-color: #dcf8c6;
+        }
+        .bot .message-text {
+            background-color: #e9ecef;
+        }
+        .chat-input {
+            display: flex;
+            border-top: 1px solid #ddd;
+        }
+        .chat-input input {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            outline: none;
+        }
+        .chat-input button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #ff6b6b;
+            color: white;
+            cursor: pointer;
+        }
+        .chat-input button:hover {
+            background-color: #cc5555;
+        }
+    </style>
+</head>
+<body>
+
+<div class="chat-container">
+    <div class="chat-header">聊天机器人助手</div>
+    <div class="chat-messages" id="chatMessages"></div>
+    <div class="chat-input">
+        <input type="text" id="userInput" placeholder="输入消息...">
+        <button onclick="sendMessage()">发送</button>
+    </div>
+</div>
+
+<script>
+    function sendMessage() {
+        const userInput = document.getElementById('userInput');
+        const messageText = userInput.value.trim();
+        if (!messageText) return;
+
+        appendMessage('user', messageText);
+
+        // 模拟机器人的回复
+        setTimeout(() => {
+            const botResponse = getBotResponse(messageText);
+            appendMessage('bot', botResponse);
+        }, 500);
+
+        userInput.value = '';
+    }
+
+    function appendMessage(sender, text) {
+        const chatMessages = document.getElementById('chatMessages');
+        const messageElement = document.createElement('div');
+        messageElement.classList.add('message', sender);
+        messageElement.innerHTML = `<div class="message-text">${text}</div>`;
+        chatMessages.appendChild(messageElement);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function getBotResponse(userMessage) {
+        const responses = [
+            "嘿，你今天咋样？",
+            "哇哦，听起来真酷！我也想去试试。",
+            "哈哈，逗我呢？",
+            "哎呀，心情不好啊，聊聊吧。",
+            "最近有啥新事儿？",
+            "哈哈，好主意！",
+            "你说得对头！",
+            "那下次一起去呗！",
+            "哈哈，你真是太搞笑了！",
+            "别闹了，说正经的。",
+            "你是不是又在撒谎？",
+            "好吧，我相信你。我要去偷笑了。",
+            "你这是在挑战我的智商吗？",
+            "嘿嘿，你说得我都有点心动了。",
+            "咱们换个话题吧，最近有没有什么好玩的事儿？",
+            "哈哈，这真是个大新闻！",
+            "哎呀，看来你遇到了难题，要不要找我吐槽一下？",
+            "那你最近有啥打算？",
+            "哈哈，这个想法不错，我们一起来实现它吧！",
+            "你说得对，我也这么想。",
+            "那我们下次见吧，先聊这些啦！",
+            "哟，你这是在跟我撒娇呢？",
+            "哈哈，你这逗比。",
+            "哎呀，你这话说得我都不好意思了。",
+            "那你最近有没有什么新鲜事儿？",
+            "哈哈，这真是个惊喜！",
+            "哎呀，看来你心情不太好，要不要找个地方发泄一下？",
+            "那你最近有啥计划？",
+            "哈哈，这个主意太棒了，我们一起去做吧！",
+            "你说得对，我也觉得。",
+            "那我们下次见面再聊，现在先聊这些吧！"
+        ];
+        return responses[Math.floor(Math.random() * responses.length)];
+    }
+</script>
+
+</body>
+</html>
+
+
